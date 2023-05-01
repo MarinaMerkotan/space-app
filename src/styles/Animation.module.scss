@@ -76,47 +76,46 @@
             animation-delay: 2100ms;
         }
     }
+  @media (max-width:767px) {
+    width: 20vw;
+    height: 20vh;
+    top: 20px;
+    left: 0;
+  }
 }
     
-    
+/* Animations */
+@keyframes tail {
+  0% {
+    width: 0;
+  }
+  
+  30% {
+    width: 100px;
+  }
+  
+  100% {
+    width: 0;
+  }
+}
 
-    
+@keyframes shining {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 30px;
+  }
+  100% {
+    width: 0;
+  }
+}
 
-    
-    
-    
-    /* Animations */
-    @keyframes tail {
-      0% {
-        width: 0;
-      }
-      
-      30% {
-        width: 100px;
-      }
-      
-      100% {
-        width: 0;
-      }
-    }
-    
-    @keyframes shining {
-      0% {
-        width: 0;
-      }
-      50% {
-        width: 30px;
-      }
-      100% {
-        width: 0;
-      }
-    }
-    
-    @keyframes shooting {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(320px);
-      }
-    }
+@keyframes shooting {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(320px);
+  }
+}

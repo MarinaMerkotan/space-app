@@ -19,8 +19,8 @@ const Home = () => {
       </Head>
       <section className={styles.section_main}>
         <div className={styles.left_block}>
-          <h1>Welcome to space!</h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Saepe, eum dolorum ea eligendi quia consectetur eos molestiae eius assumenda consequuntur in illum sed facere veritatis quas rerum dignissimos minima maiores.</p>
+          <h1>Hi, Walle speaking!</h1>
+          <p>I will show you how beautiful our universe is. Every day, Nasa posts what it thinks is the best image of the day. To view today's image, just click the button below, or go to the calendar page and choose your date.</p>
           <div className={styles.wrapper_link}>
             <Link href={`/calendar/${date}`} className={styles.link}>
               <Image 
@@ -33,12 +33,12 @@ const Home = () => {
             </Link>
           </div>
         </div>
-        <div>
+        <div className={styles.right_block}>
           <Image
             src={walle}
             alt="Robot Walle"
-            width={496}
-            height={525}
+            width={640}
+            height={604}
             priority
           />
         </div>

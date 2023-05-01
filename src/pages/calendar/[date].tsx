@@ -8,7 +8,7 @@ export const getStaticPaths = async () => {
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=2023-04-01`);
     const data = await response.json();
 
-    const paths = data.map(({date}: any) => ({
+    const paths = data.map(({date} : IPhoto) => ({
         params: {date: date}
     }))
 
@@ -42,24 +42,20 @@ const Photo = ({photo}: IPhotoPatams) => {
     return (
         <>
             <Head>
-                <title>Astronomy Picture</title>
+                <title>Picture</title>
             </Head>
             <section className={styles.section_photo}>
-                <div className={styles.space}></div>
                 <h1>{photo.title}</h1>
                 <p className={styles.date}>{photo.date}</p>
-                {/* <div className={styles.wrapper_image}> */}
+                <div className={styles.wrapper_image}>
                     <Image
                         src={photo.url}
-                        placeholder="blur"
-                        blurDataURL={photo.url}
-                        priority
                         quality={100}
                         alt={photo.title}
                         width={960}
                         height={639}
                     />
-                {/* </div> */}
+                </div>
                 <p className={styles.explanation}>{photo.explanation}</p>
             </section>
         </>

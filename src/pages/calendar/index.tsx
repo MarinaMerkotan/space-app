@@ -29,7 +29,7 @@ const Calendar = ({photos} : ICalendarParams) => {
   return (
     <>
       <Head>
-        <title>List of days</title>
+        <title>Calendar</title>
       </Head>
       <section className={styles.wrapper_section}>
         <h2>Astronomy Picture of the Day</h2>
