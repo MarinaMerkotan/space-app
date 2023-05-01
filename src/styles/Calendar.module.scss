@@ -1,0 +1,31 @@
+.wrapper_section {
+    padding: 50px 0;
+    h2 {
+        text-align: center;
+    }
+    .description {
+        margin: 20px 0 40px;
+    }
+    .date_list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+.apod_info {
+    width: 30%;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #e4751b;
+    border-radius: 20px;
+    text-align: center;
+    transition: all .9s;
+
+    &:hover {
+        box-shadow: 10px 10px 20px rgba(118, 97, 81, 0.85);
+        -webkit-transform: translateY(-5px);
+        transform: translateY(-5px);
+        transition: all .9s;
+    }
+}
