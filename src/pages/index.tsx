@@ -29,7 +29,7 @@ const Home = () => {
                 width={40}
                 height={40}
               />
-              Today's picture
+              {"Today's picture"}
             </Link>
           </div>
         </div>
