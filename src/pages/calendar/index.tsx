@@ -7,18 +7,25 @@ import PhotoOfTheDay from '../../components/PhotoOfTheDay';
 import styles from '@/styles/Calendar.module.scss'
 
 export const getStaticProps: GetStaticProps = async () => {
+  try {
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=2023-04-01`);
     const data = await response.json();
 
     if(!data) {
-        return {
-            notFound: true
-        }
+      return {
+        notFound: true
+      }
     }
 
     return {
-        props: {photos: data.reverse()}
+      props: {photos: data.reverse()}
     }
+  } catch {
+    return {
+      props: {photos: null}
+    }
+  }
+
 }
 
 interface ICalendarParams {
