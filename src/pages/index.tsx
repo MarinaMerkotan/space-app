@@ -20,7 +20,7 @@ const Home = () => {
       <section className={styles.section_main}>
         <div className={styles.left_block}>
           <h1>Hi, Walle speaking!</h1>
-          <p>I will show you how beautiful our universe is. Every day, Nasa posts what it thinks is the best image of the day. To view today's image, just click the button below, or go to the calendar page and choose your date.</p>
+          <p>{"I will show you how beautiful our universe is. Every day, Nasa posts what it thinks is the best image of the day. To view today's image, just click the button below, or go to the calendar page and choose your date."}</p>
           <div className={styles.wrapper_link}>
             <Link href={`/calendar/${date}`} className={styles.link}>
               <Image 
