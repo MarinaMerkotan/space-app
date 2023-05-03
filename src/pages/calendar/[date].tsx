@@ -14,7 +14,7 @@ export const getStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: 'blocking',
     }
 }
 
@@ -23,7 +23,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&date=${date}`);
     const data = await response.json();
 
-    if(!data) {
+    if(!data || data.code === 400) {
         return {
             notFound: true
         }
@@ -48,13 +48,16 @@ const Photo = ({photo}: IPhotoPatams) => {
                 <h1>{photo.title}</h1>
                 <p className={styles.date}>{photo.date}</p>
                 <div className={styles.wrapper_image}>
+                {photo.media_type === 'image' ? 
                     <Image
                         src={photo.url}
                         quality={100}
                         alt={photo.title}
                         width={960}
                         height={639}
-                    />
+                    /> : 
+                    <iframe className={styles.video} width="560" height="300" src={photo.url} allow="autoplay; encrypted-media" allowFullScreen></iframe>
+                }
                 </div>
                 <p className={styles.explanation}>{photo.explanation}</p>
             </section>

@@ -10,6 +10,12 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
+        .error {
+            color: rgb(215, 37, 37);
+            font-size: 30px;
+            text-align: center;
+            margin: 0 auto;
+        }
     }
 }
 

@@ -1,17 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
-import { GetStaticProps } from 'next';
 import { IPhoto } from '../../types/IPhoto';
 import PhotoOfTheDay from '../../components/PhotoOfTheDay';
 
 import styles from '@/styles/Calendar.module.scss'
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps = async () => {
   try {
     const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=2023-04-01`);
     const data = await response.json();
 
-    if(!data) {
+    if(!data || data.code === 400) {
       return {
         notFound: true
       }
@@ -22,7 +21,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   } catch {
     return {
-      props: {photos: null}
+      notFound: true
     }
   }
 
