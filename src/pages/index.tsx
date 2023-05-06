@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react';
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
@@ -7,10 +8,14 @@ import walle from '../../public/walle.png';
 import Animation from '@/components/Animation';
 
 const Home = () => {
-  const currentDate = new Date();
-  const day = currentDate.getDay();
-  const month = currentDate.getMonth() + 1;
-  const date = `2023-${month >= 10 ? month : `0${month}`}-${day >= 10 ? day : `0${day}`}`;
+  const [date, setDate] = useState('');
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const day = currentDate.getDay();
+    const month = currentDate.getMonth() + 1;
+    setDate(`2023-${month >= 10 ? month : `0${month}`}-${day >= 10 ? day : `0${day}`}`);
+  }, [])
 
   return (
     <>
@@ -22,7 +27,7 @@ const Home = () => {
           <h1>Hi, Walle speaking!</h1>
           <p>{"I will show you how beautiful our universe is. Every day, Nasa posts what it thinks is the best image of the day. To view today's image, just click the button below, or go to the calendar page and choose your date."}</p>
           <div className={styles.wrapper_link}>
-            <Link href={`/calendar/${date}`} className={styles.link}>
+            <Link href={`/calendar/${date}`} className={styles.link} prefetch={false}>
               <Image 
                 src={rocket}
                 alt="rocket"
