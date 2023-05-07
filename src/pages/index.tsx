@@ -11,10 +11,8 @@ const Home = () => {
   const [date, setDate] = useState('');
 
   useEffect(() => {
-    const currentDate = new Date();
-    const day = currentDate.getDay();
-    const month = currentDate.getMonth() + 1;
-    setDate(`2023-${month >= 10 ? month : `0${month}`}-${day >= 10 ? day : `0${day}`}`);
+    const dateNow = new Date();
+    setDate(dateNow.toISOString().substring(0,10));
   }, [])
 
   return (
