@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps } from 'next';
 
 import PhotoOfTheDay from '../../components/PhotoOfTheDay';
 
