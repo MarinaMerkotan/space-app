@@ -16,7 +16,7 @@ const Header = () => {
         <header>
             <div className='container'>
                 <div>
-                    <Image src={logo} width={40} height={40} alt='next.js'/>
+                    <Image src={logo} width={150} height={50} alt='logo space'/>
                 </div>
                 <nav className={styles.navbar}>
                     {navigation.map(({id, title, path}) => (
