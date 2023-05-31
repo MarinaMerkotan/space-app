@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 import PhotoOfTheDay from '../../components/PhotoOfTheDay';
 
@@ -8,6 +8,8 @@ import { IPhoto } from '../../types/IPhoto';
 import styles from '@/styles/Calendar.module.scss'
 
 let cacheData: null | Array<IPhoto> = null;
+
+type Photos = [IPhoto];
 
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
@@ -17,13 +19,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
       };
     }
 
-    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=2023-04-01`);
+    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=2023-05-01`);
     const data = await response.json();
 
     cacheData = data.reverse();
 
     return {
-      props: {photos: data.reverse()},
+      props: {photos: cacheData},
     };
   } catch {
     return {
@@ -32,11 +34,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-interface ICalendarParams {
-  photos: [IPhoto];
-}
-
-const Calendar = ({photos} : ICalendarParams) => (
+const Calendar = ({photos} : InferGetServerSidePropsType<typeof getServerSideProps>) => (
   <>
     <Head>
       <title>Calendar</title>
@@ -45,7 +43,7 @@ const Calendar = ({photos} : ICalendarParams) => (
       <h2>Astronomy Picture of the Day</h2>
       <p className={styles.description}>Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer..</p>
       <div className={styles.date_list}>
-        {photos && photos.map(({date}) => (
+        {photos && photos.map(({date}: IPhoto) => (
             <PhotoOfTheDay date={date} key={date}/>
         ))}
       </div>
