@@ -9,8 +9,6 @@ import styles from '@/styles/Calendar.module.scss'
 
 let cacheData: null | Array<IPhoto> = null;
 
-type Photos = [IPhoto];
-
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
     if (cacheData) {
@@ -34,7 +32,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
   }
 }
 
-const Calendar = ({photos} : InferGetServerSidePropsType<typeof getServerSideProps>) => (
+interface ICalendarParams {
+  photos: [IPhoto];
+}
+
+const Calendar = ({photos} : ICalendarParams) => (
   <>
     <Head>
       <title>Calendar</title>
@@ -43,7 +45,7 @@ const Calendar = ({photos} : InferGetServerSidePropsType<typeof getServerSidePro
       <h2>Astronomy Picture of the Day</h2>
       <p className={styles.description}>Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer..</p>
       <div className={styles.date_list}>
-        {photos && photos.map(({date}: IPhoto) => (
+        {photos && photos.map(({date}) => (
             <PhotoOfTheDay date={date} key={date}/>
         ))}
       </div>
