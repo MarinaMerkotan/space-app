@@ -30,7 +30,7 @@ const Home = () => {
               "I will show you how beautiful our universe is. Every day, Nasa posts what it thinks is the best image of the day. To view today's image, just click the button below, or go to the calendar page and choose your date."
             }
           </p>
-          <TelegramButtonOverlay handleTelegramResponse={(user) => console.log(user)} />
+          <TelegramButtonOverlay handleTelegramResponse={(user: any) => console.log(user)} />
           <div className={styles.wrapper_link}>
             <div className={styles.container}>
               {/* Звичайна зовнішня кнопка */}
@@ -64,21 +64,21 @@ const Home = () => {
 
 export default Home;
 
-const TelegramButtonOverlay = ({ handleTelegramResponse }) => {
+const TelegramButtonOverlay = ({ handleTelegramResponse }: {handleTelegramResponse: any}) => {
   useEffect(() => {
     // Функція, яка викликається при кліку на вашу власну кнопку
     const handleCustomButtonClick = () => {
       // Симулювати клік на кнопку Telegram через скрипт Telegram Widget
-      document.getElementById('telegram-login').click();
+      document.getElementById('telegram-login')!.click();
     };
 
     // Додати обробник подій до вашої власної кнопки
-    document.getElementById('custom-button').addEventListener('click', handleCustomButtonClick);
+    document.getElementById('custom-button')!.addEventListener('click', handleCustomButtonClick);
 
     // Повернення функції, яка буде викликана при видаленні компонента
     return () => {
       // При видаленні компонента видаляємо обробник подій
-      document.getElementById('custom-button').removeEventListener('click', handleCustomButtonClick);
+      document.getElementById('custom-button')!.removeEventListener('click', handleCustomButtonClick);
     };
   }, []); // Завантажити це тільки раз, після монтування компонента
 
