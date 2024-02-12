@@ -31,10 +31,14 @@ const Home = () => {
             }
           </p>
           <div className={styles.wrapper_link}>
-            <Link href={`/calendar/${date}`} className={styles.link} prefetch={false}>
-              <Image src={rocket} alt='rocket' width={40} height={40} />
-              {"Today's picture"}
-            </Link>
+            <TelegramLoginButton
+              botName='TestCustomButtonBot'
+              dataOnauth={(user) => console.log(user)}
+              className={styles.link}
+            >
+                <Image src={rocket} alt='rocket' width={40} height={40} />
+                {"Today's picture"}
+            </TelegramLoginButton>
           </div>
         </div>
         <div className={styles.right_block}>
