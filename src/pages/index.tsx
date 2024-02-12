@@ -31,14 +31,25 @@ const Home = () => {
             }
           </p>
           <div className={styles.wrapper_link}>
-            <TelegramLoginButton
+          <div className={styles.container}>
+      {/* Звичайна зовнішня кнопка */}
+      <button className={styles.normalButton}>Your Button</button>
+      
+      {/* TelegramLoginButton з прозорими стилями */}
+      <TelegramLoginButton
+        dataOnauth={(user) => console.log(user)}
+        botName={'TestCustomButtonBot'}
+        className={styles.telegramButton}
+      />
+    </div>
+            {/* <TelegramLoginButton
               botName='TestCustomButtonBot'
               dataOnauth={(user) => console.log(user)}
               className={styles.link}
             >
                 <Image src={rocket} alt='rocket' width={40} height={40} />
                 {"Today's picture"}
-            </TelegramLoginButton>
+            </TelegramLoginButton> */}
           </div>
         </div>
         <div className={styles.right_block}>

@@ -51,6 +51,27 @@
           left: 100%;
         }
       }
+      .container {
+        position: relative; /* Позиціонування відносно контейнера */
+        width: 200px;
+        height: 30px;
+        .normalButton {
+          width: 200px;
+          height: 30px;
+          /* Стилі для звичайної зовнішньої кнопки */
+        }
+        
+        .telegramButton {
+          position: absolute; /* Абсолютне позиціонування */
+          top: 0; /* Розміщення зверху */
+          left: 0; /* Розміщення зліва */
+          width: 100%; /* 100% ширина */
+          height: 100%; /* 100% висота */
+          opacity: 0; /* Прозорість */
+          cursor: pointer; /* Зміна курсору на покажчик */
+        }
+      }
+      
     }
   }
   .right_block {
