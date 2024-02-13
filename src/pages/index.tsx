@@ -15,11 +15,14 @@ const Home = () => {
     const dateNow = new Date();
     setDate(dateNow.toISOString().substring(0, 10));
   }, []);
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   const handleClick = () => {
     console.log('handleClick');
-    wrapperRef?.current?.style?.border = '2px solid red';
+    if (wrapperRef && wrapperRef.current) {
+      console.log('handleClick if');
+      wrapperRef.current.style.border = '2px solid red';
+    }
   };
   return (
     <>
@@ -49,12 +52,20 @@ const Home = () => {
           <button
             onClick={() => {
               console.log('first');
-              wrapperRef?.current?.onClick();
+              if (wrapperRef && wrapperRef.current) {
+              console.log('first if');
+                wrapperRef?.current?.click();
+              }
             }}
           >
             tets click
           </button>
-
+          <h1>STYLE</h1>
+          <TelegramLoginButton
+                dataOnauth={(user) => console.log(user)}
+                botName={'TestCustomButtonBot'}
+                className={styles.telegram}
+              />
           {/* <TelegramButtonOverlay handleTelegramResponse={(user: any) => console.log(user)} /> */}
           <div className={styles.wrapper_link}>
             <div className={styles.container}>
