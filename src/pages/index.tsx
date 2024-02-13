@@ -44,6 +44,31 @@ const Home = () => {
     console.log('auth_date:', auth_date);
     console.log('hash:', hash);
   }, []);
+    // Функція для обробки автентифікації користувача через Telegram
+  window.onTelegramAuth = (user) => {
+    alert(
+      'Logged in as ' +
+        user.first_name +
+        ' ' +
+        user.last_name +
+        ' (' +
+        user.id +
+        (user.username ? ', @' + user.username : '') +
+        ')'
+    );
+    // Тут ви можете виконати будь-які подальші дії з отриманими даними користувача
+  };
+
+  const handleClick = () => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://telegram.org/js/telegram-widget.js?22';
+    script.setAttribute('data-telegram-login', 'TestCustomButtonBot');
+    script.setAttribute('data-size', 'large');
+    script.setAttribute('data-onauth', 'onTelegramAuth(user)');
+    script.setAttribute('data-request-access', 'write');
+    document.body.appendChild(script);
+  };
 
   return (
     <>
@@ -59,15 +84,19 @@ const Home = () => {
             }
           </p>
           <h1>container</h1>
+              <div>
+      {/* Кнопка для виклику скрипта */}
+      <button onClick={handleClick}>Увійти за допомогою Telegram</button>
+    </div>
           <div className={styles.container}>
             <button className={styles.normalButton}>Button</button>
 
-            <TelegramLoginButton
+{/*             <TelegramLoginButton
               dataOnauth={(user) => console.log(user)}
               botName={'TestCustomButtonBot'}
               className={styles.telegramButton}
               dataAuthUrl='https://space-sigma-three.vercel.app/'
-            />
+            /> */}
           </div>
           <div className={styles.wrapper_link}></div>
         </div>
