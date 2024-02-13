@@ -7,7 +7,11 @@ import rocket from '../../public/rocket.svg';
 import walle from '../../public/walle.png';
 import Animation from '@/components/Animation';
 import TelegramLoginButton from 'telegram-login-button';
-
+declare global {
+    interface Window {
+        onTelegramAuth: (user: any) => void;
+    }
+}
 const Home = () => {
   const [date, setDate] = useState('');
 
