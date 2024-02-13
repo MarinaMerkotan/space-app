@@ -29,22 +29,18 @@ const Home = () => {
               "I will show you how beautiful our universe is. Every day, Nasa posts what it thinks is the best image of the day. To view today's image, just click the button below, or go to the calendar page and choose your date."
             }
           </p>
-          <h1>STYLE</h1>
-          <TelegramLoginButton
-            dataOnauth={(user) => console.log(user)}
-            botName={'TestCustomButtonBot'}
-            className={styles.telegram}
-          />
-          <div className={styles.wrapper_link}>
-            {/* <div className={styles.container}>
-              <button className={styles.normalButton}>Your Button</button>
+          <h1>container</h1>
+          <div className={styles.container}>
+              <button className={styles.normalButton}>Button</button>
 
               <TelegramLoginButton
                 dataOnauth={(user) => console.log(user)}
                 botName={'TestCustomButtonBot'}
                 className={styles.telegramButton}
               />
-            </div> */}
+            </div>
+          <div className={styles.wrapper_link}>
+
           </div>
         </div>
         <div className={styles.right_block}>

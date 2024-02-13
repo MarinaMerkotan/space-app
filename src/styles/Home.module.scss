@@ -8,15 +8,40 @@
     h1 {
       margin-bottom: 30px;
     }
-    .telegram {
-      background-color: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 49px;
-      width: 49px;
-      border: 0.6px solid #000;
-      border-radius: 25px;
+    // .telegram {
+    //   background-color: transparent;
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   height: 49px;
+    //   width: 49px;
+    //   border: 0.6px solid #000;
+    //   border-radius: 25px;
+    // }
+    .container {
+      position: relative; /* Позиціонування відносно контейнера */
+      width: 200px;
+      height: 30px;
+      .normalButton {
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 49px;
+        width: 49px;
+        border: 0.6px solid #000;
+        border-radius: 25px;
+      }
+      
+      .telegramButton {
+        position: absolute; /* Абсолютне позиціонування */
+        top: 0; /* Розміщення зверху */
+        left: 0; /* Розміщення зліва */
+        width: 100%; /* 100% ширина */
+        height: 100%; /* 100% висота */
+        opacity: 0; /* Прозорість */
+        cursor: pointer; /* Зміна курсору на покажчик */
+      }
     }
 
     .wrapper_link {
@@ -61,26 +86,7 @@
           left: 100%;
         }
       }
-      .container {
-        position: relative; /* Позиціонування відносно контейнера */
-        width: 200px;
-        height: 30px;
-        .normalButton {
-          width: 200px;
-          height: 30px;
-          /* Стилі для звичайної зовнішньої кнопки */
-        }
-        
-        .telegramButton {
-          position: absolute; /* Абсолютне позиціонування */
-          top: 0; /* Розміщення зверху */
-          left: 0; /* Розміщення зліва */
-          width: 100%; /* 100% ширина */
-          height: 100%; /* 100% висота */
-          opacity: 0; /* Прозорість */
-          cursor: pointer; /* Зміна курсору на покажчик */
-        }
-      }
+
       
     }
   }
