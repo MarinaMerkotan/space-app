@@ -45,19 +45,13 @@ const Home = () => {
     console.log('hash:', hash);
   }, []);
     // Функція для обробки автентифікації користувача через Telegram
-  window.onTelegramAuth = (user) => {
-    alert(
-      'Logged in as ' +
-        user.first_name +
-        ' ' +
-        user.last_name +
-        ' (' +
-        user.id +
-        (user.username ? ', @' + user.username : '') +
-        ')'
-    );
-    // Тут ви можете виконати будь-які подальші дії з отриманими даними користувача
-  };
+    useEffect(() => {
+        // Функція для обробки автентифікації користувача через Telegram
+        window.onTelegramAuth = user => {
+            console.log('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+            // Тут ви можете виконати будь-які подальші дії з отриманими даними користувача
+        };
+    }, []);
 
   const handleClick = () => {
     const script = document.createElement('script');
