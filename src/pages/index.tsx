@@ -20,53 +20,40 @@ const Home = () => {
     setDate(dateNow.toISOString().substring(0, 10));
   }, []);
 
-  useEffect(() => {
-    function getParameterByName(name: string) {
-      const url = window.location.href;
-      console.log('URL', url)
-      name = name.replace(/[\[\]]/g, '\\$&');
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
+  // useEffect(() => {
+  //   function getParameterByName(name: string) {
+  //     const url = window.location.href;
+  //     console.log('URL', url)
+  //     name = name.replace(/[\[\]]/g, '\\$&');
+  //     const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+  //       results = regex.exec(url);
+  //     if (!results) return null;
+  //     if (!results[2]) return '';
+  //     return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  //   }
 
-    const id = getParameterByName('id');
-    const first_name = getParameterByName('first_name');
-    const last_name = getParameterByName('last_name');
-    const username = getParameterByName('username');
-    const photo_url = getParameterByName('photo_url');
-    const auth_date = getParameterByName('auth_date');
-    const hash = getParameterByName('hash');
+  //   const id = getParameterByName('id');
+  //   const first_name = getParameterByName('first_name');
+  //   const last_name = getParameterByName('last_name');
+  //   const username = getParameterByName('username');
+  //   const photo_url = getParameterByName('photo_url');
+  //   const auth_date = getParameterByName('auth_date');
+  //   const hash = getParameterByName('hash');
 
-    console.log('ID:', id);
-    console.log("first_name:", first_name);
-    console.log('last_name:', last_name);
-    console.log('username:', username);
-    console.log('photo_url:', photo_url);
-    console.log('auth_date:', auth_date);
-    console.log('hash:', hash);
-  }, []);
-    // Функція для обробки автентифікації користувача через Telegram
-    useEffect(() => {
-        // Функція для обробки автентифікації користувача через Telegram
-        window.onTelegramAuth = user => {
-            console.log('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-            // Тут ви можете виконати будь-які подальші дії з отриманими даними користувача
-        };
-    }, []);
+  //   console.log('ID:', id);
+  //   console.log("first_name:", first_name);
+  //   console.log('last_name:', last_name);
+  //   console.log('username:', username);
+  //   console.log('photo_url:', photo_url);
+  //   console.log('auth_date:', auth_date);
+  //   console.log('hash:', hash);
+  // }, []);
 
-  const handleClick = () => {
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://telegram.org/js/telegram-widget.js?22';
-    script.setAttribute('data-telegram-login', 'TestCustomButtonBot');
-    script.setAttribute('data-size', 'large');
-    script.setAttribute('data-onauth', 'onTelegramAuth(user)');
-    script.setAttribute('data-request-access', 'write');
-    document.body.appendChild(script);
-  };
+
+    window.onTelegramAuth = user => {
+        alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
+        // Тут ви можете виконати будь-які подальші дії з отриманими даними користувача
+    };
 
   return (
     <>
@@ -84,7 +71,20 @@ const Home = () => {
           <h1>container</h1>
               <div>
       {/* Кнопка для виклику скрипта */}
-      <button onClick={handleClick}>Увійти за допомогою Telegram</button>
+        <div>
+            {/* Код для вбудовування скрипту Telegram Login Widget */}
+            <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="TestCustomButtonBot" data-size="large" data-userpic="false" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+            {/* Кнопка для виклику автентифікації через Telegram */}
+            <button
+                onClick={() => {
+                    // Виклик функції, що починає автентифікацію через Telegram
+                    window.loginWithTelegram();
+                }}
+            >
+                Увійти за допомогою Telegram
+            </button>
+        </div>
+
     </div>
           <div className={styles.container}>
             <button className={styles.normalButton}>Button</button>
