@@ -16,6 +16,35 @@ const Home = () => {
     setDate(dateNow.toISOString().substring(0, 10));
   }, []);
 
+  useEffect(() => {
+    function getParameterByName(name: string) {
+      const url = window.location.href;
+      console.log('URL', url)
+      name = name.replace(/[\[\]]/g, '\\$&');
+      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    const id = getParameterByName('id');
+    const first_name = getParameterByName('first_name');
+    const last_name = getParameterByName('last_name');
+    const username = getParameterByName('username');
+    const photo_url = getParameterByName('photo_url');
+    const auth_date = getParameterByName('auth_date');
+    const hash = getParameterByName('hash');
+
+    console.log('ID:', id);
+    console.log("first_name:", first_name);
+    console.log('last_name:', last_name);
+    console.log('username:', username);
+    console.log('photo_url:', photo_url);
+    console.log('auth_date:', auth_date);
+    console.log('hash:', hash);
+  }, []);
+
   return (
     <>
       <Head>
@@ -31,17 +60,16 @@ const Home = () => {
           </p>
           <h1>container</h1>
           <div className={styles.container}>
-              <button className={styles.normalButton}>Button</button>
+            <button className={styles.normalButton}>Button</button>
 
-              <TelegramLoginButton
-                dataOnauth={(user) => console.log(user)}
-                botName={'TestCustomButtonBot'}
-                className={styles.telegramButton}
-              />
-            </div>
-          <div className={styles.wrapper_link}>
-
+            <TelegramLoginButton
+              dataOnauth={(user) => console.log(user)}
+              botName={'TestCustomButtonBot'}
+              className={styles.telegramButton}
+              dataAuthUrl='https://space-sigma-three.vercel.app/'
+            />
           </div>
+          <div className={styles.wrapper_link}></div>
         </div>
         <div className={styles.right_block}>
           <Image src={walle} alt='Robot Walle' width={640} height={604} priority />
