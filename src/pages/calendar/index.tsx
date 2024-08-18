@@ -1,56 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
 
 import PhotoOfTheDay from '../../components/PhotoOfTheDay';
-
 import { IPhoto } from '../../types/IPhoto';
-import styles from '@/styles/Calendar.module.scss'
+import styles from '@/styles/Calendar.module.scss';
+import Loader from '@/components/Loader';
 
 let cacheData: null | Array<IPhoto> = null;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  try {
-    if (cacheData) {
-      return {
-        props: {photos: cacheData},
-      };
-    }
+const Calendar = () => {
+  const [photos, setPhotos] = useState<IPhoto[] | null>(cacheData);
+  const [loading, setLoading] = useState(!cacheData);
+  const [notFound, setNotFound] = useState(false);
 
-    const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.API_KEY}&start_date=2023-05-01`);
-    const data = await response.json();
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      if (cacheData) {
+        setPhotos(cacheData);
+        setLoading(false);
+        return;
+      }
 
-    cacheData = data.reverse();
+      try {
+        const now = new Date();
+        const startDate = new Date(now.getFullYear(), now.getMonth(), 2).toISOString().split('T')[0];
 
-    return {
-      props: {photos: cacheData},
+        const response = await fetch(
+          `https://api.nasa.gov/planetary/apod?api_key=${process.env.NEXT_PUBLIC_API_KEY}&start_date=${startDate}`
+        );
+        const data = await response.json();
+
+        cacheData = data.reverse();
+        setPhotos(cacheData);
+      } catch {
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
     };
-  } catch {
-    return {
-      notFound: true
-    }
+
+    fetchPhotos();
+  }, []);
+
+  if (loading) {
+    return <Loader />;
   }
-}
 
-interface ICalendarParams {
-  photos: [IPhoto];
-}
+  if (notFound) {
+    return <div>Not Found</div>;
+  }
 
-const Calendar = ({photos} : ICalendarParams) => (
-  <>
-    <Head>
-      <title>Calendar</title>
-    </Head>
-    <section className={styles.wrapper_section}>
-      <h2>Astronomy Picture of the Day</h2>
-      <p className={styles.description}>Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer..</p>
-      <div className={styles.date_list}>
-        {photos && photos.map(({date}) => (
-            <PhotoOfTheDay date={date} key={date}/>
-        ))}
-      </div>
-    </section>
-  </>
-)
+  return (
+    <>
+      <Head>
+        <title>Calendar</title>
+      </Head>
+      <section className={styles.wrapper_section}>
+        <h2>Astronomy Picture of the Day</h2>
+        <p className={styles.description}>
+          Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along
+          with a brief explanation written by a professional astronomer.
+        </p>
+        <div className={styles.date_list}>
+          {photos && photos.map(({ date }) => <PhotoOfTheDay date={date} key={date} />)}
+        </div>
+      </section>
+    </>
+  );
+};
 
 export default Calendar;
